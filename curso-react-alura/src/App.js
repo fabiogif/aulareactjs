@@ -23,10 +23,12 @@ class App extends Component {
     ]
   };
 
+  removeAutor = () => {};
+
   render() {
     return (
       <div className="App">
-        <Tabela autores={this.state.autores} />
+        <Tabela autores={this.state.autores} removeAutor={this.removeAutor} />
       </div>
     );
   }
