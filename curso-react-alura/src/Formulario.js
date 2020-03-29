@@ -3,6 +3,7 @@ import React, { Component } from "react";
 class Formulario extends Component {
   constructor(props) {
     super(props);
+
     this.inicialState = {
       nome: "",
       livro: "",
@@ -17,6 +18,10 @@ class Formulario extends Component {
     });
   };
 
+  submitFormularo = () => {
+    this.props.escudadorDeSubmit(this.state);
+    this.setState(this.inicialState);
+  };
   render() {
     const { nome, livro, preco } = this.state;
     return (
@@ -46,7 +51,9 @@ class Formulario extends Component {
           onChange={this.escutadorDeInput}
         />
 
-        <button type="button">Salvar</button>
+        <button type="button" onClick={this.submitFormularo}>
+          Salvar
+        </button>
       </form>
     );
   }

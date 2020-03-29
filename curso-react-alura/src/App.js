@@ -24,6 +24,12 @@ class App extends Component {
     ]
   };
 
+  escudadorDeSubmit = autor => {
+    this.setState({
+      autores: [...this.state.autores, autor]
+    });
+  };
+
   removeAutor = index => {
     const { autores } = this.state;
     this.setState({
@@ -37,7 +43,7 @@ class App extends Component {
     return (
       <Fragment>
         <Tabela autores={this.state.autores} removeAutor={this.removeAutor} />
-        <Form />
+        <Form escudadorDeSubmit={this.escudadorDeSubmit} />
       </Fragment>
     );
   }
