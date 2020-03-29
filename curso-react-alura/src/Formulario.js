@@ -26,32 +26,54 @@ class Formulario extends Component {
     const { nome, livro, preco } = this.state;
     return (
       <form>
-        <label htmlFor="nome">Nome</label>
-        <input
-          id="nome"
-          type="text"
-          name="nome"
-          value={nome}
-          onChange={this.escutadorDeInput}
-        />
-        <label htmlFor="nome">Livro</label>
-        <input
-          id="livro"
-          type="text"
-          name="livro"
-          value={livro}
-          onChange={this.escutadorDeInput}
-        />
-        <label htmlFor="preco">Preço</label>
-        <input
-          id="preco"
-          type="text"
-          name="preco"
-          value={preco}
-          onChange={this.escutadorDeInput}
-        />
+        <div className="row">
+          <div className="input-field col s4">
+            <label htmlFor="nome" className="input-field">
+              Nome
+            </label>
+            <input
+              className="validate"
+              id="nome"
+              type="text"
+              name="nome"
+              value={nome}
+              onChange={this.escutadorDeInput}
+            />
+          </div>
+          <div className="input-field col s4">
+            <label htmlFor="nome" className="input-field">
+              Livro
+            </label>
+            <input
+              className="validate"
+              id="livro"
+              type="text"
+              name="livro"
+              value={livro}
+              onChange={this.escutadorDeInput}
+            />
+          </div>
 
-        <button type="button" onClick={this.submitFormularo}>
+          <div className="input-field col s4">
+            <label htmlFor="preco" className="input-field">
+              Preço
+            </label>
+            <input
+              className="validate"
+              id="preco"
+              type="text"
+              name="preco"
+              value={preco}
+              onChange={this.escutadorDeInput}
+            />
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="waves-effect waves-light green btn"
+          onClick={this.submitFormularo}
+        >
           Salvar
         </button>
       </form>
