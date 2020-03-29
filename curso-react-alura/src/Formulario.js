@@ -11,7 +11,7 @@ class Formulario extends Component {
     };
     this.state = this.inicialState;
   }
-  escutadorDeInput = event => {
+  escutadorDeInput = (event) => {
     const { name, value } = event.target;
     this.setState({
       [name]: value
