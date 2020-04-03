@@ -5,29 +5,62 @@ class Formulario extends Component {
   constructor(props) {
     super(props);
 
-    this.validator = new FormValidator({
-      campo: "nome",
-      metodo: "isEmpty"
-    });
+    this.validador = new FormValidator([
+      {
+        campo: "nome",
+        metodo: "isEmpty",
+        validQuando: false,
+        mensagem: "Preencha o campo nome",
+      },
+      {
+        campo: "livro",
+        metodo: "isEmpty",
+        validQuando: false,
+        mensagem: "Preencha o campo livro",
+      },
+      {
+        campo: "preco",
+        metodo: "isInt",
+        args: [
+          {
+            min: 0,
+            max: 9999,
+          },
+        ],
+        validQuando: true,
+        mensagem: "Preencha preço com valor númerico",
+      },
+    ]);
 
     this.inicialState = {
       nome: "",
       livro: "",
-      preco: ""
+      preco: "",
+      validacao: this.validador.valido(),
     };
     this.state = this.inicialState;
   }
   escutadorDeInput = (event) => {
     const { name, value } = event.target;
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
   submitFormularo = () => {
-    if (this.validator.valid(this.state)) {
+    const validacao = this.validador.valida(this.state);
+
+    if (validacao.isValid) {
       this.props.escudadorDeSubmit(this.state);
       this.setState(this.inicialState);
+    } else {
+      const { nome, livro, preco } = validacao;
+      const campos = [nome, livro, preco];
+
+      const camposInvalidos = campos.filter((elem) => {
+        return elem.isInvalid;
+      });
+      camposInvalidos.forEach(console.log);
     }
   };
   render() {

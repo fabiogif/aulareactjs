@@ -1,21 +1,42 @@
-import validator from 'validator';
+import validador from 'validator';
 
 class FormValidator {
-    constructor(validacao) {
-        this.validacao = validacao
+    constructor(validacoes) {
+        this.validacoes = validacoes
     }
 
-    valid(state) {
-        const campoValor = state[this.validacao.campo.toString()]
-        const metodoValidacao = validator[this.validacao.metodo]
+    valida(state) {
+        let validacao = this.valido()
 
-        if (metodoValidacao(campoValor, [], state)) {
-            console.log('Form invalido')
-            return false
-        }
-        return true
+        this.validacoes.forEach(regra => {
+            const campoValor = state[regra.campo.toString()]
+            const args = regra.args || []
 
+            const metodoValidacao = typeof regra.metodo === 'string' ? validador[regra.metodo] : regra.metodo
+
+            if (metodoValidacao(campoValor, ...args, state) !== regra.validQuando) {
+
+                validacao[regra.campo] = {
+                    isInvalid: true,
+                    message: regra.mensagem
+                }
+
+                validacao.isValid = false;
+            }
+        });
+
+        return validacao
+    }
+    valido() {
+        const validacao = {}
+
+        this.validacoes.map(regra => (
+            validacao[regra.campo] = { isInvalid: false, message: '' }
+
+        ))
+
+        return { isValid: true, ...validacao }
     }
 }
 
-export default FormValidator;
+export default FormValidator
