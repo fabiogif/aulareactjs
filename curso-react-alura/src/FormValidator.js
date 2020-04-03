@@ -20,7 +20,6 @@ class FormValidator {
                     isInvalid: true,
                     message: regra.mensagem
                 }
-
                 validacao.isValid = false;
             }
         });
@@ -32,7 +31,6 @@ class FormValidator {
 
         this.validacoes.map(regra => (
             validacao[regra.campo] = { isInvalid: false, message: '' }
-
         ))
 
         return { isValid: true, ...validacao }
