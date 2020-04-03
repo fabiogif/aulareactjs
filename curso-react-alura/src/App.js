@@ -48,6 +48,7 @@ class App extends Component {
       <Fragment>
         <Header />
         <div className="container mb-10">
+          <h1>Aprendendo React</h1>
           <Form escudadorDeSubmit={this.escudadorDeSubmit} />{" "}
           <Tabela autores={this.state.autores} removeAutor={this.removeAutor} />{" "}
         </div>{" "}
