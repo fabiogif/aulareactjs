@@ -5,7 +5,8 @@ import Tabela from "./Tabela";
 import Header from "./Header";
 import Form from "./Formulario";
 import PopUp from "./popUp";
-
+import Sidebar from "./SiderBar";
+import ApiService from "./apiService";
 class App extends Component {
   state = {
     autores: [
@@ -44,11 +45,12 @@ class App extends Component {
   };
 
   render() {
+    ApiService.listarNome().then((res) => console.log(res.data));
     return (
       <Fragment>
         <Header />
         <div className="container mb-10">
-          <h1>Aprendendo React</h1>
+          <h1> Cadastro </h1>{" "}
           <Form escudadorDeSubmit={this.escudadorDeSubmit} />{" "}
           <Tabela autores={this.state.autores} removeAutor={this.removeAutor} />{" "}
         </div>{" "}

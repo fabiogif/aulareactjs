@@ -1,22 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import LinkWrapper from "./LinkWrapper";
 
 const Header = () => {
   return (
     <nav>
       <div className="nav-wrapper indigo blue">
-        <Link to="/" className="brand-logo">
-          Aprendendo React
-        </Link>
+        <LinkWrapper to="/" className="brand-logo" activeStyle={{}}>
+          Vamos de React
+        </LinkWrapper>
         <ul id="nav-mobile" className="right">
           <li>
-            <Link to="/autores">Autores</Link>
+            <LinkWrapper to="/autores">Autores</LinkWrapper>
           </li>
           <li>
-            <Link to="/livros">Livros</Link>
+            <LinkWrapper to="/livros">Livros</LinkWrapper>
           </li>
           <li>
-            <Link to="/sobre">Sobre</Link>
+            <LinkWrapper to="/sobre">Sobre</LinkWrapper>
           </li>
         </ul>
       </div>
