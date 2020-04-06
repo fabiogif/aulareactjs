@@ -1,24 +1,26 @@
+import api from './Api'
+
 const ApiService = {
     // Autores
     listarAutores: () => {
-        return fetch('http://localhost:8000/api/autor').then(res => res.json())
+        return fetch(`${api.baseUrl }autor`).then(res => res.json())
     },
     criarAutor: autor => {
-        return fetch('http://localhost:8000/api/autor', { method: 'POST', headers: { 'content-type': 'application/json' }, body: autor })
+        return fetch(`${api.baseUrl }autor`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: autor })
             .then(res => res.json())
     },
 
     listarNome: () => {
-        return fetch('http://localhost:8000/api/autor/nome').then(res => res.json())
+        return fetch(`${api.baseUrl }autor/nome`).then(res => res.json())
     },
     removeAutor: id => {
-        return fetch(`http://localhost:8000/api/autor/${id}`, { method: 'DELETE', headers: { 'content-type': 'application/json' } })
+        return fetch(`${api.baseUrl }autor/${id}`, { method: 'DELETE', headers: { 'content-type': 'application/json' } })
             .then(res => res.json())
     },
 
     //Livro
     listarLivro: () => {
-        return fetch('http://localhost:8000/api/autor/livro').then(res => res.json())
+        return fetch(`${api.baseUrl }autor/livro`).then(res => res.json())
     }
 
 
