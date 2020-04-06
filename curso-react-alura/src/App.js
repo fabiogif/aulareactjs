@@ -7,42 +7,41 @@ import Form from "./Formulario";
 import PopUp from "./popUp";
 import Sidebar from "./SiderBar";
 import ApiService from "./apiService";
+
 class App extends Component {
-  state = {
-    autores: [
-      {
-        nome: "Eduarda",
-        livro: "Java",
-        preco: "99",
-      },
-      {
-        nome: "Fabio",
-        livro: "React",
-        preco: "100",
-      },
-      {
-        nome: "Alba",
-        livro: "Geografia",
-        preco: "100",
-      },
-    ],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      autores: [],
+    };
+  }
 
   escudadorDeSubmit = (autor) => {
-    this.setState({
-      autores: [...this.state.autores, autor],
-    });
+    ApiService.criarAutor(JSON.stringify(autor))
+      .then((res) => res.data)
+      .then((autor) => {
+        this.setState({
+          autores: [...this.state.autores, autor],
+        });
+      });
   };
 
-  removeAutor = (index) => {
+  removeAutor = (id) => {
     const { autores } = this.state;
     this.setState({
-      autores: autores.filter((autor, posAtual) => {
-        return posAtual !== index;
+      autores: autores.filter((autor) => {
+        return autor.id !== id;
       }),
     });
+    ApiService.removeAutor(id);
     PopUp.exibeMenssagem("error", "Excluido com sucesso");
   };
+
+  componentDidMount() {
+    ApiService.listarAutores().then((res) => {
+      this.setState({ autores: [...this.state.autores, ...res.data] });
+    });
+  }
 
   render() {
     ApiService.listarNome().then((res) => console.log(res.data));

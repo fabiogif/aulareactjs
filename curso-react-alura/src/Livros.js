@@ -2,50 +2,29 @@ import React, { Component, Fragment } from "react";
 import Header from "./Header";
 import DataTable from "./DataTable";
 import Sidebar from "./SiderBar";
+import ApiService from "./apiService";
 
 class Livros extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      livro: [
-        {
-          nome: "Paulo",
-          livro: "React",
-          preco: "1000",
-        },
-        {
-          nome: "Daniel",
-          livro: "Java",
-          preco: "99",
-        },
-        {
-          nome: "Marcos",
-          livro: "Design",
-          preco: "150",
-        },
-        {
-          nome: "Bruno",
-          livro: "DevOps",
-          preco: "100",
-        },
-        {
-          nome: "Nico",
-          livro: "Java",
-          preco: "9999",
-        },
-      ],
+      livro: [],
       titulo: "Livro",
     };
   }
 
+  componentDidMount() {
+    ApiService.listarLivro().then((res) => {
+      this.setState({ livro: [...this.state.livro, ...res.data] });
+    });
+  }
   render() {
     return (
       <Fragment>
         <Header />
-        <Sidebar />
         <div className="container">
-          <smal>Lista Livros</smal>
+          <h1>Lista Livros</h1>
           <DataTable
             dados={this.state.livro}
             titulo={this.state.titulo}
